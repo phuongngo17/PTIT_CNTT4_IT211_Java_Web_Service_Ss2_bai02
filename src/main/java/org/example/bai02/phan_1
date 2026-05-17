@@ -1,0 +1,17 @@
+1. Sự khác biệt giữa HTTP POST và HTTP PUT
+| Tiêu chí            | POST                     | PUT                            |
+| ------------------- | ------------------------ | ------------------------------ |
+| Mục đích            | Tạo mới tài nguyên       | Cập nhật tài nguyên đã tồn tại |
+| URL                 | Thường không chứa ID     | Thường chứa ID                 |
+| Idempotent          | Không                    | Có                             |
+| Gửi request lặp lại | Có thể tạo nhiều bản ghi | Kết quả vẫn như nhau           |
+
+
+2. Vì sao dùng POST cho cả tạo mới và cập nhật gây lỗi?
+Trong code hiện tại:
+@PostMapping
+public ResponseEntity<Customer> createOrUpdateCustomer(...)
+POST đang làm hai việc:
+Tạo mới
+Cập nhật
+Điều này vi phạm nguyên tắc RESTful API.
